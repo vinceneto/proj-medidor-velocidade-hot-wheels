@@ -34,7 +34,7 @@ void updateDisplay()
 {
     lcd.setCursor(0,1);
     lcd.print("Tempo: ");
-    lcd.print(elapsedTime);  // Converte millis para segundos
+    lcd.print(elapsedTime);
     lcd.print(" ms");
 }
 
@@ -48,6 +48,7 @@ void resetTimer()
     lcd.setCursor(0,1);
     lcd.print("Pressione START");
 }
+
 void setup() {
     lcd.begin(16,2);   // Inicializa o LCD
     lcd.backlight();    // Ativa a luz de fundo
@@ -57,23 +58,29 @@ void setup() {
     lcd.print("Pressione START");
 }
 
-void loop() {
-    if (isRunning) {
+void loop() 
+{
+    if (isRunning) 
+    {
         elapsedTime = millis() - startTime;
         updateDisplay();
     }
 
-    // Botão para iniciar/pausar o cronômetro
-    if (digitalRead(SENSOR_START_PIN) == LOW) {
+    // Sensor para iniciar o cronômetro
+    if (digitalRead(SENSOR_START_PIN) == LOW) 
+    {
         startTimer();   
     }
 
-    if (digitalRead(SENSOR_FINISH_PIN) == LOW) {
+    // Sensor para pausar o cronômetro
+    if (digitalRead(SENSOR_FINISH_PIN) == LOW) 
+    {
         pauseTimer();
     }
 
     // Botão para reiniciar o cronômetro
-    if (digitalRead(BOTAO_RESET_PIN) == HIGH) {
+    if (digitalRead(BOTAO_RESET_PIN) == HIGH) 
+    {
         resetTimer();
         delay(500);  // Debounce
     }
